@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PACKCRAFT — Your Vision, Our Craft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-logo" data-page="home">PACKCRAFT</div>
+  <div class="nav-links">
+    <a href="#" class="nav-link active" data-page="home">HOME</a>
+    <a href="#" class="nav-link" data-page="backpacks">BACKPACKS</a>
+    <a href="#" class="nav-link" data-page="wallets">WALLETS</a>
+    <a href="#" class="nav-link" data-page="tshirts">TSHIRTS</a>
+    <a href="#" class="nav-link" data-page="hoodies">HOODIES</a>
+    <a href="#" class="nav-link" data-page="bonus">BONUS</a>
+    <a href="#" class="nav-link nav-link-business" data-page="business">FOR BUSINESS</a>
+  </div>
+  <button class="nav-menu-btn">
+    <span></span><span></span><span></span>й
+  </button>
+</nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="menu-overlay" id="menu-overlay"></div>
+
+<!-- MOBILE MENU DRAWER -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-header">
+    <span class="mobile-menu-logo">PACKCRAFT</span>
+    <button class="mobile-menu-close" id="mobile-menu-close"
+      onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('menu-overlay').classList.remove('open');document.querySelector('.nav-menu-btn').classList.remove('active')">✕</button>
+  </div>
+  <nav class="mobile-nav">
+    <a class="mobile-nav-link" data-page="home">HOME</a>
+    <a class="mobile-nav-link" data-page="backpacks">BACKPACKS</a>
+    <a class="mobile-nav-link" data-page="wallets">WALLETS</a>
+    <a class="mobile-nav-link" data-page="tshirts">TSHIRTS</a>
+    <a class="mobile-nav-link" data-page="hoodies">HOODIES</a>
+    <a class="mobile-nav-link" data-page="bonus">BONUS</a>
+    <a class="mobile-nav-link mobile-nav-business" data-page="business">FOR BUSINESS</a>
+    <a class="mobile-nav-link" data-page="process">EXPLORE THE LAB</a>
+  </nav>
+  <div class="mobile-menu-footer">
+    <button class="btn-primary mobile-cta" data-page="backpacks"
+      onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('menu-overlay').classList.remove('open');document.querySelector('.nav-menu-btn').classList.remove('active');setTimeout(()=>showPage('backpacks'),300)">START CONFIGURATION</button>
+    <p class="mobile-menu-copy">© 2024 NEON NOCTURNE SYSTEMS</p>
+  </div>
+</div>
+
+<!-- ===== PAGE: HOME ===== -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Your Vision,<br><span class="hero-title-accent">Our Craft</span></h1>
+      <p class="hero-sub">Precision-engineered carry and apparel, customizable down to the last fiber. Designed for the nocturnal, built for the digital frontier.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" data-page="backpacks">START CONFIGURATION</button>
+        <button class="btn-ghost" data-page="process">EXPLORE THE LAB</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="modules">
+    <div class="modules-header">
+      <h2 class="section-title">SYSTEM MODULES</h2>
+      <p class="section-sub">SELECT A BASE TO BEGIN CUSTOMIZATION</p>
+    </div>
+    <div class="modules-grid">
+
+      <div class="module-card" data-page="backpacks">
+        <div class="module-img-wrap">
+          <!-- If you have Container.png locally, it shows; fallback is CSS background -->
+          <img class="module-img-photo" src="Container.png"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+            alt="Backpacks">
+          <div class="module-img module-img-backpack" style="display:none"></div>
+        </div>
+        <div class="module-info">
+          <span class="module-name">BACKPACKS</span>
+          <button class="btn-customize" data-page="backpacks">CUSTOMIZE</button>
+        </div>
+      </div>
+
+      <div class="module-card" data-page="wallets">
+        <div class="module-img-wrap">
+          <img class="module-img-photo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBZgALzANfbTxVH_YW4fGBTjNPlPbL5Lu3iQ&s"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+            alt="Wallets">
+          <div class="module-img module-img-wallet" style="display:none"></div>
+        </div>
+        <div class="module-info">
+          <span class="module-name">WALLETS</span>
+          <button class="btn-customize" data-page="wallets">CUSTOMIZE</button>
+        </div>
+      </div>
+
+      <div class="module-card" data-page="tshirts">
+        <div class="module-img-wrap">
+          <img class="module-img-photo" src="Container (2).png"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+            alt="T-Shirts">
+          <div class="module-img module-img-tshirt" style="display:none"></div>
+        </div>
+        <div class="module-info">
+          <span class="module-name">TSHIRTS</span>
+          <button class="btn-customize" data-page="tshirts">CUSTOMIZE</button>
+        </div>
+      </div>
+
+      <div class="module-card" data-page="hoodies">
+        <div class="module-img-wrap">
+          <img class="module-img-photo" src="data:image/jpeg;base64,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"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+            alt="Hoodies">
+          <div class="module-img module-img-hoodie" style="display:none"></div>
+        </div>
+        <div class="module-info">
+          <span class="module-name">HOODIES</span>
+          <button class="btn-customize" data-page="hoodies">CUSTOMIZE</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMPETITION SECTION -->
+  <section class="competition-section">
+    <div class="competition-card">
+      <div class="competition-left">
+        <div class="competition-title-row">
+          <span class="competition-icon">🏆</span>
+          <h2 class="competition-title">КОНКУРСЫ</h2>
+        </div>
+        <p class="competition-desc">
+          Boost your status in the nocturnal frontier. Participate in our ecosystem challenges to earn
+          <span class="competition-highlight">NEON_POINTS</span> and unlock exclusive hardware modules.
+        </p>
+        <ul class="competition-list">
+          <li>
+            <span class="comp-bullet">⚡</span>
+            Participate in bi-weekly design challenges to showcase your aesthetic vision.
+          </li>
+          <li>
+            <span class="comp-bullet">⚙</span>
+            Submit unique customizations and configurations to the public lab.
+          </li>
+          <li>
+            <span class="comp-bullet">↗</span>
+            Stay active on the platform and contribute to the neural forest community.
+          </li>
+        </ul>
+      </div>
+      <div class="competition-right">
+        <div class="competition-reward-card">
+          <p class="reward-label">CURRENT SEASON REWARD</p>
+          <div class="reward-pts">5,000 <span class="reward-unit">pts</span></div>
+          <button class="btn-primary reward-btn" id="join-challenge-btn">JOIN CHALLENGE</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== PAGE: BUSINESS ===== -->
+<div class="page" id="page-business">
+
+  <!-- HERO -->
+  <section class="biz-hero">
+    <div class="biz-hero-glow"></div>
+    <div class="biz-hero-content">
+      <span class="biz-eyebrow">B2B SOLUTIONS</span>
+      <h1 class="biz-title">Scale Your Brand.<br><span class="biz-title-accent">We Handle the Craft.</span></h1>
+      <p class="biz-sub">Custom gear for teams, agencies, and enterprises. Bulk orders, white-label production, and dedicated account management — all in one neural-powered platform.</p>
+      <div class="biz-hero-btns">
+        <button class="btn-primary" id="biz-contact-btn">GET A QUOTE</button>
+        <button class="btn-ghost" id="biz-catalog-btn">VIEW CATALOG</button>
+      </div>
+      <div class="biz-stats">
+        <div class="biz-stat"><span class="biz-stat-num">500+</span><span class="biz-stat-label">ENTERPRISE CLIENTS</span></div>
+        <div class="biz-stat-divider"></div>
+        <div class="biz-stat"><span class="biz-stat-num">50K+</span><span class="biz-stat-label">UNITS DELIVERED</span></div>
+        <div class="biz-stat-divider"></div>
+        <div class="biz-stat"><span class="biz-stat-num">14 DAYS</span><span class="biz-stat-label">AVG. LEAD TIME</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="biz-features">
+    <p class="biz-section-eyebrow">WHY PACKCRAFT B2B</p>
+    <h2 class="biz-section-title">Everything your team needs,<br>nothing you don't.</h2>
+    <div class="biz-features-grid">
+      <div class="biz-feature-card">
+        <div class="biz-feature-icon">📦</div>
+        <h3>Bulk Production</h3>
+        <p>Order 10 to 10,000 units with consistent quality and tiered pricing that scales with your volume.</p>
+      </div>
+      <div class="biz-feature-card">
+        <div class="biz-feature-icon">🎨</div>
+        <h3>White-Label Ready</h3>
+        <p>Your logo, your colors, your identity. Full branding control across every material and component.</p>
+      </div>
+      <div class="biz-feature-card">
+        <div class="biz-feature-icon">⚡</div>
+        <h3>Priority Production</h3>
+        <p>Business accounts get dedicated production lanes with guaranteed lead times and real-time tracking.</p>
+      </div>
+      <div class="biz-feature-card">
+        <div class="biz-feature-icon">🛡</div>
+        <h3>Quality Assured</h3>
+        <p>Every batch undergoes multi-stage QA with detailed reports and replacement guarantees included.</p>
+      </div>
+      <div class="biz-feature-card">
+        <div class="biz-feature-icon">💼</div>
+        <h3>Dedicated Manager</h3>
+        <p>A personal account manager handles your orders, adjustments, and coordination from start to finish.</p>
+      </div>
+      <div class="biz-feature-card">
+        <div class="biz-feature-icon">📊</div>
+        <h3>Analytics Dashboard</h3>
+        <p>Track orders, spending, delivery status, and team usage across all your business accounts in one place.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING TIERS -->
+  <section class="biz-pricing">
+    <p class="biz-section-eyebrow">BUSINESS TIERS</p>
+    <h2 class="biz-section-title">Choose your level of scale.</h2>
+    <div class="biz-pricing-grid">
+      <div class="biz-tier-card">
+        <span class="biz-tier-badge">STARTER</span>
+        <div class="biz-tier-price">$0<span>/mo</span></div>
+        <p class="biz-tier-desc">For small teams getting started with custom gear.</p>
+        <ul class="biz-tier-list">
+          <li>✓ Up to 50 units/order</li>
+          <li>✓ 2 colorways included</li>
+          <li>✓ Standard lead time (14 days)</li>
+          <li>✓ Email support</li>
+          <li class="dim">✗ White-label branding</li>
+          <li class="dim">✗ Dedicated manager</li>
+        </ul>
+        <button class="btn-ghost biz-tier-btn">START FREE</button>
+      </div>
+      <div class="biz-tier-card biz-tier-featured">
+        <span class="biz-tier-badge biz-tier-badge-green">PROFESSIONAL</span>
+        <div class="biz-tier-price">$299<span>/mo</span></div>
+        <p class="biz-tier-desc">For growing brands that need full customization.</p>
+        <ul class="biz-tier-list">
+          <li>✓ Up to 500 units/order</li>
+          <li>✓ Unlimited colorways</li>
+          <li>✓ Priority lead time (7 days)</li>
+          <li>✓ White-label branding</li>
+          <li>✓ Dedicated account manager</li>
+          <li class="dim">✗ Analytics dashboard</li>
+        </ul>
+        <button class="btn-primary biz-tier-btn">GET STARTED</button>
+      </div>
+      <div class="biz-tier-card">
+        <span class="biz-tier-badge">ENTERPRISE</span>
+        <div class="biz-tier-price">Custom<span></span></div>
+        <p class="biz-tier-desc">For large operations with complex requirements.</p>
+        <ul class="biz-tier-list">
+          <li>✓ Unlimited units</li>
+          <li>✓ Custom materials & hardware</li>
+          <li>✓ Express lead time (3–5 days)</li>
+          <li>✓ White-label + co-branding</li>
+          <li>✓ Dedicated manager + team</li>
+          <li>✓ Full analytics dashboard</li>
+        </ul>
+        <button class="btn-ghost biz-tier-btn">CONTACT US</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT CATALOG PREVIEW -->
+  <section class="biz-catalog">
+    <p class="biz-section-eyebrow">PRODUCT CATALOG</p>
+    <h2 class="biz-section-title">Available for bulk customization.</h2>
+    <div class="biz-catalog-grid">
+
+      <!-- BACKPACKS -->
+      <div class="biz-catalog-card">
+        <div class="biz-catalog-img biz-catalog-img-backpack">
+          <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRZXMSuvl96-L8ZgPAkM8PMk1xD_VJCyx2V0fFyf53Usn6TiMHSoKIlczaqqpyNjIEGLYeNXPER9aI9nrt8XDWgTqGOv8lidqJLyiABIiFXbvCOmSADhlqmtq9976uoOk_V-XYioQ&usqp=CAc" alt="Backpacks" onerror="this.style.display='none'">
+          <div class="biz-catalog-overlay">
+            <span class="biz-catalog-moq">MOQ: 10 units</span>
+          </div>
+        </div>
+        <div class="biz-catalog-info">
+          <div>
+            <h3 class="biz-catalog-name">BACKPACKS</h3>
+            <p class="biz-catalog-sub">Modular tactical carry systems</p>
+          </div>
+          <div class="biz-catalog-price-row">
+            <span class="biz-catalog-from">from</span>
+            <span class="biz-catalog-price" id="biz-price-backpack">$320<span class="biz-catalog-unit">/unit</span></span>
+          </div>
+        </div>
+        <!-- Bulk configurator -->
+        <div class="bulk-config">
+          <div class="bulk-tiers">
+            <span class="bulk-tier">10–99: $320/u</span>
+            <span class="bulk-tier">100–499: $275/u</span>
+            <span class="bulk-tier bulk-tier-best">500+: $220/u</span>
+          </div>
+          <div class="bulk-controls">
+            <div class="bulk-qty-wrap">
+              <button class="bulk-qty-btn" data-product="backpack" data-action="minus">−</button>
+              <input class="bulk-qty-input" id="qty-backpack" type="number" value="10" min="10" max="9999">
+              <button class="bulk-qty-btn" data-product="backpack" data-action="plus">+</button>
+            </div>
+            <div class="bulk-total-wrap">
+              <span class="bulk-total-label">TOTAL</span>
+              <span class="bulk-total-price" id="bulk-total-backpack">$3,200</span>
+            </div>
+          </div>
+          <div class="bulk-color-row">
+            <span class="bulk-mini-label">COLOR</span>
+            <div class="bulk-swatches">
+              <button class="bulk-swatch" style="background:#111" title="Black"></button>
+              <button class="bulk-swatch selected" style="background:#2dff6e" title="Green"></button>
+              <button class="bulk-swatch" style="background:#3a5048" title="Slate"></button>
+              <button class="bulk-swatch" style="background:#1a2640" title="Navy"></button>
+            </div>
+          </div>
+          <button class="btn-primary bulk-order-btn" data-product="backpack">ADD TO BULK ORDER</button>
+        </div>
+      </div>
+
+      <!-- WALLETS -->
+      <div class="biz-catalog-card">
+        <div class="biz-catalog-img biz-catalog-img-wallet">
+          <img src="https://images.unsplash.com/photo-1624913503273-5f9c4e980dba?w=600&q=80" alt="Wallets" onerror="this.style.display='none'">
+          <div class="biz-catalog-overlay">
+            <span class="biz-catalog-moq">MOQ: 25 units</span>
+          </div>
+        </div>
+        <div class="biz-catalog-info">
+          <div>
+            <h3 class="biz-catalog-name">WALLETS</h3>
+            <p class="biz-catalog-sub">Carbon fiber minimalist carry</p>
+          </div>
+          <div class="biz-catalog-price-row">
+            <span class="biz-catalog-from">from</span>
+            <span class="biz-catalog-price" id="biz-price-wallet">$95<span class="biz-catalog-unit">/unit</span></span>
+          </div>
+        </div>
+        <div class="bulk-config">
+          <div class="bulk-tiers">
+            <span class="bulk-tier">25–99: $95/u</span>
+            <span class="bulk-tier">100–499: $78/u</span>
+            <span class="bulk-tier bulk-tier-best">500+: $60/u</span>
+          </div>
+          <div class="bulk-controls">
+            <div class="bulk-qty-wrap">
+              <button class="bulk-qty-btn" data-product="wallet" data-action="minus">−</button>
+              <input class="bulk-qty-input" id="qty-wallet" type="number" value="25" min="25" max="9999">
+              <button class="bulk-qty-btn" data-product="wallet" data-action="plus">+</button>
+            </div>
+            <div class="bulk-total-wrap">
+              <span class="bulk-total-label">TOTAL</span>
+              <span class="bulk-total-price" id="bulk-total-wallet">$2,375</span>
+            </div>
+          </div>
+          <div class="bulk-color-row">
+            <span class="bulk-mini-label">COLOR</span>
+            <div class="bulk-swatches">
+              <button class="bulk-swatch selected" style="background:#111" title="Black"></button>
+              <button class="bulk-swatch" style="background:#2dff6e" title="Green"></button>
+              <button class="bulk-swatch" style="background:#3a5048" title="Slate"></button>
+              <button class="bulk-swatch" style="background:#1a2640" title="Navy"></button>
+            </div>
+          </div>
+          <button class="btn-primary bulk-order-btn" data-product="wallet">ADD TO BULK ORDER</button>
+        </div>
+      </div>
+
+      <!-- TSHIRTS -->
+      <div class="biz-catalog-card">
+        <div class="biz-catalog-img biz-catalog-img-tshirt">
+          <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&q=80" alt="T-Shirts" onerror="this.style.display='none'">
+          <div class="biz-catalog-overlay">
+            <span class="biz-catalog-moq">MOQ: 50 units</span>
+          </div>
+        </div>
+        <div class="biz-catalog-info">
+          <div>
+            <h3 class="biz-catalog-name">TSHIRTS</h3>
+            <p class="biz-catalog-sub">Technical apparel, branded print</p>
+          </div>
+          <div class="biz-catalog-price-row">
+            <span class="biz-catalog-from">from</span>
+            <span class="biz-catalog-price" id="biz-price-tshirt">$9<span class="biz-catalog-unit">/unit</span></span>
+          </div>
+        </div>
+        <div class="bulk-config">
+          <div class="bulk-tiers">
+            <span class="bulk-tier">50–199: $9/u</span>
+            <span class="bulk-tier">200–999: $7/u</span>
+            <span class="bulk-tier bulk-tier-best">1000+: $5/u</span>
+          </div>
+          <div class="bulk-controls">
+            <div class="bulk-qty-wrap">
+              <button class="bulk-qty-btn" data-product="tshirt" data-action="minus">−</button>
+              <input class="bulk-qty-input" id="qty-tshirt" type="number" value="50" min="50" max="99999">
+              <button class="bulk-qty-btn" data-product="tshirt" data-action="plus">+</button>
+            </div>
+            <div class="bulk-total-wrap">
+              <span class="bulk-total-label">TOTAL</span>
+              <span class="bulk-total-price" id="bulk-total-tshirt">$450</span>
+            </div>
+          </div>
+          <div class="bulk-color-row">
+            <span class="bulk-mini-label">COLOR</span>
+            <div class="bulk-swatches">
+              <button class="bulk-swatch selected" style="background:#f0f0f0;border:1px solid #555" title="White"></button>
+              <button class="bulk-swatch" style="background:#3a5048" title="Slate"></button>
+              <button class="bulk-swatch" style="background:#2a2a2a" title="Charcoal"></button>
+              <button class="bulk-swatch" style="background:#2dff6e" title="Green"></button>
+              <button class="bulk-swatch" style="background:#cc3333" title="Red"></button>
+            </div>
+          </div>
+          <div class="bulk-size-row">
+            <span class="bulk-mini-label">SIZE MIX</span>
+            <div class="bulk-size-btns">
+              <button class="bulk-size-btn selected">S</button>
+              <button class="bulk-size-btn selected">M</button>
+              <button class="bulk-size-btn selected">L</button>
+              <button class="bulk-size-btn selected">XL</button>
+            </div>
+          </div>
+          <button class="btn-primary bulk-order-btn" data-product="tshirt">ADD TO BULK ORDER</button>
+        </div>
+      </div>
+
+      <!-- HOODIES -->
+      <div class="biz-catalog-card">
+        <div class="biz-catalog-img biz-catalog-img-hoodie">
+          <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&q=80" alt="Hoodies" onerror="this.style.display='none'">
+          <div class="biz-catalog-overlay">
+            <span class="biz-catalog-moq">MOQ: 25 units</span>
+          </div>
+        </div>
+        <div class="biz-catalog-info">
+          <div>
+            <h3 class="biz-catalog-name">HOODIES</h3>
+            <p class="biz-catalog-sub">Premium fleece, laser engraved</p>
+          </div>
+          <div class="biz-catalog-price-row">
+            <span class="biz-catalog-from">from</span>
+            <span class="biz-catalog-price" id="biz-price-hoodie">$18<span class="biz-catalog-unit">/unit</span></span>
+          </div>
+        </div>
+        <div class="bulk-config">
+          <div class="bulk-tiers">
+            <span class="bulk-tier">25–99: $18/u</span>
+            <span class="bulk-tier">100–499: $15/u</span>
+            <span class="bulk-tier bulk-tier-best">500+: $12/u</span>
+          </div>
+          <div class="bulk-controls">
+            <div class="bulk-qty-wrap">
+              <button class="bulk-qty-btn" data-product="hoodie" data-action="minus">−</button>
+              <input class="bulk-qty-input" id="qty-hoodie" type="number" value="25" min="25" max="99999">
+              <button class="bulk-qty-btn" data-product="hoodie" data-action="plus">+</button>
+            </div>
+            <div class="bulk-total-wrap">
+              <span class="bulk-total-label">TOTAL</span>
+              <span class="bulk-total-price" id="bulk-total-hoodie">$450</span>
+            </div>
+          </div>
+          <div class="bulk-color-row">
+            <span class="bulk-mini-label">COLOR</span>
+            <div class="bulk-swatches">
+              <button class="bulk-swatch selected" style="background:#111" title="Black"></button>
+              <button class="bulk-swatch" style="background:#2a2a2a" title="Charcoal"></button>
+              <button class="bulk-swatch" style="background:#3a5048" title="Slate"></button>
+              <button class="bulk-swatch" style="background:#2dff6e" title="Green"></button>
+            </div>
+          </div>
+          <div class="bulk-size-row">
+            <span class="bulk-mini-label">SIZE MIX</span>
+            <div class="bulk-size-btns">
+              <button class="bulk-size-btn selected">S</button>
+              <button class="bulk-size-btn selected">M</button>
+              <button class="bulk-size-btn selected">L</button>
+              <button class="bulk-size-btn selected">XL</button>
+            </div>
+          </div>
+          <button class="btn-primary bulk-order-btn" data-product="hoodie">ADD TO BULK ORDER</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BULK ORDER SUMMARY -->
+    <div class="bulk-order-summary" id="bulk-order-summary" style="display:none">
+      <div class="bulk-summary-header">
+        <h3 class="bulk-summary-title">📦 BULK ORDER SUMMARY</h3>
+        <button class="bulk-summary-clear" id="bulk-clear-btn">CLEAR ALL</button>
+      </div>
+      <div class="bulk-summary-items" id="bulk-summary-items"></div>
+      <div class="bulk-summary-footer">
+        <div class="bulk-summary-total-row">
+          <span class="bulk-summary-label">ESTIMATED TOTAL</span>
+          <span class="bulk-summary-total" id="bulk-grand-total">$0</span>
+        </div>
+        <button class="btn-primary bulk-summary-submit" id="bulk-submit-btn">REQUEST BULK QUOTE →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="biz-contact" id="biz-contact-section">
+    <div class="biz-contact-card">
+      <div class="biz-contact-left">
+        <p class="biz-section-eyebrow">GET IN TOUCH</p>
+        <h2 class="biz-contact-title">Ready to scale<br>your brand?</h2>
+        <p class="biz-contact-desc">Fill in your details and our B2B team will reach out within 24 hours with a custom quote tailored to your needs.</p>
+        <div class="biz-contact-info">
+          <div class="biz-contact-row"><span class="biz-contact-icon">📧</span><span>business@packcraft.io</span></div>
+          <div class="biz-contact-row"><span class="biz-contact-icon">📞</span><span>+1 (800) PACKCRAFT</span></div>
+          <div class="biz-contact-row"><span class="biz-contact-icon">🕐</span><span>Response within 24 hours</span></div>
+        </div>
+      </div>
+      <div class="biz-contact-right">
+        <div class="form-group">
+          <label class="form-label">COMPANY NAME</label>
+          <input class="form-input" type="text" placeholder="ACME CORPORATION" id="biz-company">
+        </div>
+        <div class="form-group">
+          <label class="form-label">CONTACT NAME</label>
+          <input class="form-input" type="text" placeholder="ALEX NEON" id="biz-name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">EMAIL ADDRESS</label>
+          <input class="form-input" type="email" placeholder="alex@company.com" id="biz-email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">ESTIMATED ORDER SIZE</label>
+          <div class="tag-selector" id="biz-order-size">
+            <button class="tag selected">10–50</button>
+            <button class="tag">50–200</button>
+            <button class="tag">200–1000</button>
+            <button class="tag">1000+</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">MESSAGE</label>
+          <textarea class="form-input biz-textarea" placeholder="Tell us about your project..." id="biz-message"></textarea>
+        </div>
+        <button class="btn-primary btn-full" id="biz-submit-btn">SEND INQUIRY</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="biz-footer">
+    <div class="accent" style="font-weight:700;font-size:.75rem;letter-spacing:.1em">PACKCRAFT BUSINESS</div>
+    <div class="footer-legal-links">
+      <a href="#">PRIVACY POLICY</a>
+      <a href="#">TERMS OF SERVICE</a>
+      <a href="#">SUPPORT</a>
+    </div>
+    <div style="color:var(--muted);font-size:.7rem">© 2024 PACKCRAFT. ALL RIGHTS RESERVED.</div>
+  </footer>
+
+</div>
+
+<!-- ===== PAGE: PROCESS ===== -->
+  
+
+<!-- ===== PAGE: BACKPACKS ===== -->
+<div class="page" id="page-backpacks">
+  <div class="config-layout">
+    <div class="config-preview">
+      <div class="product-img-wrap">
+        <div class="product-img product-img-backpack" id="upload-area-backpack">
+          <!-- Product base photo -->
+          <img class="product-base-img" src="data:image/avif;base64,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" alt="Backpack"
+            onerror="this.style.display='none'">
+          <!-- Upload system -->
+          <input type="file" accept="image/*" class="upload-file-input" id="file-backpack">
+          <div class="upload-zone" id="upload-zone-backpack">
+            <div class="upload-icon">📷<span>+</span></div>
+            <p>UPLOAD LOGO / PHOTO</p>
+            <p class="upload-hint">Click or drag &amp; drop</p>
+          </div>
+          <img class="upload-preview" id="preview-backpack" src="" alt="Logo">
+          <button class="upload-remove" id="remove-backpack" title="Remove">✕</button>
+          <div class="img-resize-panel" id="resize-backpack">
+            <div class="resize-row">
+              <span class="resize-label">SIZE</span>
+              <input type="range" class="resize-slider" id="rs-size-backpack" min="10" max="100" value="55">
+              <span class="resize-val" id="rv-size-backpack">55%</span>
+            </div>
+            <div class="resize-row">
+              <span class="resize-label">← →</span>
+              <input type="range" class="resize-slider" id="rs-x-backpack" min="-40" max="40" value="0">
+              <span class="resize-val" id="rv-x-backpack">0</span>
+            </div>
+            <div class="resize-row">
+              <span class="resize-label">↑ ↓</span>
+              <input type="range" class="resize-slider" id="rs-y-backpack" min="-40" max="40" value="0">
+              <span class="resize-val" id="rv-y-backpack">0</span>
+            </div>
+            <div class="resize-btns">
+              <button class="resize-action-btn" id="rb-change-backpack">📁 CHANGE</button>
+              <button class="resize-action-btn" id="rb-reset-backpack">↺ RESET</button>
+              <button class="resize-action-btn danger" id="rb-del-backpack">✕ REMOVE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-name-block">
+        <h2 class="product-name">NOCTURNE_01</h2>
+        <p class="product-series">MODULAR CARRY SYSTEM // CORE SERIES</p>
+      </div>
+      <div class="preview-controls">
+        <button class="ctrl-btn" title="Zoom">🔍</button>
+        <button class="ctrl-btn" title="Rotate">↺</button>
+        <button class="ctrl-btn" title="Flip">⇄</button>
+      </div>
+    </div>
+    <div class="config-panel">
+      <h1 class="config-title">NOCTURNE_01</h1>
+      <p class="config-desc">Customize your high-performance modular system. Engineered for urban survival and tactical aesthetics.</p>
+      <div class="config-section">
+        <label class="config-label">MATERIAL SYSTEM</label>
+        <div class="option-cards">
+          <div class="option-card selected"><strong>DYNEEMA COMPOSITE</strong><span>Ultralight: 15x stronger than steel</span></div>
+          <div class="option-card"><strong>X-PAC DWR</strong><span>Multi-layer laminated shell</span></div>
+        </div>
+      </div>
+      <div class="config-section">
+        <label class="config-label">COLOR PROFILE</label>
+        <div class="color-selector">
+          <button class="color-swatch swatch-black selected"></button>
+          <button class="color-swatch swatch-green"></button>
+          <button class="color-swatch swatch-slate"></button>
+          <button class="color-swatch swatch-navy"></button>
+        </div>
+      </div>
+      <div class="config-section">
+        <label class="config-label">CLOSURE HARDWARE</label>
+        <div class="tag-selector">
+          <button class="tag selected">FIDLOCK BUCKLES</button>
+          <button class="tag">COBRA BUCKLES</button>
+          <button class="tag">YKK AQUAGUARD</button>
+        </div>
+      </div>
+      <div class="config-section">
+        <label class="config-label">LASER ENGRAVING</label>
+        <div class="input-wrap">
+          <input type="text" class="config-input" placeholder="ENTER IDENTIFIER...">
+          <span class="input-icon">✎</span>
+        </div>
+      </div>
+      <div class="config-footer">
+        <div class="config-price-block">
+          <span class="config-price-label">CURRENT CONFIGURATION</span>
+          <span class="config-price" id="bp-price">$495.00</span>
+        </div>
+        <button class="btn-primary btn-full" id="bp-add">ADD TO BACKPACK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE: WALLETS ===== -->
+<div class="page" id="page-wallets">
+  <div class="config-layout">
+    <div class="config-preview">
+      <div class="product-img-wrap">
+        <div class="product-img product-img-wallet" id="upload-area-wallet">
+          <img class="product-base-img product-base-img-wallet"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6o3I0JEYfjBpBJWApqDwIejH2XUA4TWHCfA&s" alt="Wallet"
+            onerror="this.style.display='none'">
+          <input type="file" accept="image/*" class="upload-file-input" id="file-wallet">
+          <div class="upload-zone" id="upload-zone-wallet">
+            <div class="upload-icon">📷<span>+</span></div>
+            <p>UPLOAD LOGO / PHOTO</p>
+            <p class="upload-hint">Click or drag &amp; drop</p>
+          </div>
+          <img class="upload-preview" id="preview-wallet" src="" alt="Logo">
+          <button class="upload-remove" id="remove-wallet" title="Remove">✕</button>
+          <div class="img-resize-panel" id="resize-wallet">
+            <div class="resize-row">
+              <span class="resize-label">SIZE</span>
+              <input type="range" class="resize-slider" id="rs-size-wallet" min="10" max="100" value="55">
+              <span class="resize-val" id="rv-size-wallet">55%</span>
+            </div>
+            <div class="resize-row">
+              <span class="resize-label">← →</span>
+              <input type="range" class="resize-slider" id="rs-x-wallet" min="-40" max="40" value="0">
+              <span class="resize-val" id="rv-x-wallet">0</span>
+            </div>
+            <div class="resize-row">
+              <span class="resize-label">↑ ↓</span>
+              <input type="range" class="resize-slider" id="rs-y-wallet" min="-40" max="40" value="0">
+              <span class="resize-val" id="rv-y-wallet">0</span>
+            </div>
+            <div class="resize-btns">
+              <button class="resize-action-btn" id="rb-change-wallet">📁 CHANGE</button>
+              <button class="resize-action-btn" id="rb-reset-wallet">↺ RESET</button>
+              <button class="resize-action-btn danger" id="rb-del-wallet">✕ REMOVE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-name-block">
+        <h2 class="product-name">CIPHER_W1</h2>
+        <p class="product-series">MINIMALIST CARRY // CORE SERIES</p>
+      </div>
+      <div class="preview-controls">
+        <button class="ctrl-btn" title="Zoom">🔍</button>
+        <button class="ctrl-btn" title="Rotate">↺</button>
+        <button class="ctrl-btn" title="Flip">⇄</button>
+      </div>
+    </div>
+    <div class="config-panel">
+      <h1 class="config-title">CIPHER_W1</h1>
+      <p class="config-desc">Ultra-slim tactical wallet. Carbon fiber reinforced with RFID shielding as standard.</p>
+      <div class="config-section">
+        <label class="config-label">SHELL MATERIAL</label>
+        <div class="option-cards">
+          <div class="option-card selected"><strong>CARBON FIBER</strong><span>3K twill weave, featherlight</span></div>
+          <div class="option-card"><strong>TITANIUM FRAME</strong><span>Grade 5 aerospace alloy</span></div>
+        </div>
+      </div>
+      <div class="config-section">
+        <label class="config-label">COLOR PROFILE</label>
+        <div class="color-selector">
+          <button class="color-swatch swatch-black selected"></button>
+          <button class="color-swatch swatch-green"></button>
+          <button class="color-swatch swatch-slate"></button>
+          <button class="color-swatch swatch-navy"></button>
+        </div>
+      </div>
+      <div class="config-section">
+        <label class="config-label">CAPACITY MODULES</label>
+        <div class="tag-selector">
+          <button class="tag selected">4-CARD SLIM</button>
+          <button class="tag">8-CARD EXTENDED</button>
+          <button class="tag">CASH SLEEVE</button>
+        </div>
+      </div>
+      <div class="config-section">
+        <label class="config-label">LASER ENGRAVING</label>
+        <div class="input-wrap">
+          <input type="text" class="config-input" placeholder="ENTER IDENTIFIER...">
+          <span class="input-icon">✎</span>
+        </div>
+      </div>
+      <div class="config-footer">
+        <div class="config-price-block">
+          <span class="config-price-label">CURRENT CONFIGURATION</span>
+          <span class="config-price" id="wl-price">$145.00</span>
+        </div>
+        <button class="btn-primary btn-full" id="wl-add">ADD TO WALLET</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE: TSHIRTS ===== -->
+<div class="page" id="page-tshirts">
+  <div class="config-layout">
+    <div class="config-preview">
+      <div class="product-img-wrap">
+        <div class="product-img product-img-tshirt" id="upload-area-tshirt">
+          <img class="product-base-img"
+            src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=700&q=85" alt="T-Shirt"
+            onerror="this.style.display='none'">
+          <input type="file" accept="image/*" class="upload-file-input" id="file-tshirt">
+          <div class="upload-zone upload-zone-circle" id="upload-zone-tshirt">
+            <div class="upload-icon">📷</div>
+            <p>UPLOAD LOGO</p>
+            <p class="upload-hint">Click or drop</p>
+          </div>
+          <img class="upload-preview upload-preview-circle" id="preview-tshirt" src="" alt="Logo">
+          <button class="upload-remove" id="remove-tshirt" title="Remove">✕</button>
+          <div class="img-resize-panel" id="resize-tshirt">
+            <div class="resize-row">
+              <span class="resize-label">SIZE</span>
+              <input type="range" class="resize-slider" id="rs-size-tshirt" min="10" max="100" value="55">
+              <span class="resize-val" id="rv-size-tshirt">55%</span>
+            </div>
+            <div class="resize-row">
+              <span class="resize-label">← →</span>
+              <input type="range" class="resize-slider" id="rs-x-tshirt" min="-40" max="40" value="0">
+              <span class="resize-val" id="rv-x-tshirt">0</span>
+            </div>
+            <div class="resize-row">
+              <span class="resize-label">↑ ↓</span>
+              <input type="range" class="resize-slider" id="rs-y-tshirt" min="-40" max="40" value="0">
+              <span class="resize-val" id="rv-y-tshirt">0</span>
+            </div>
+            <div class="resize-btns">
+              <button class="resize-action-btn" id="rb-change-tshirt">📁 CHANGE</button>
+              <button class="resize-action-btn" id="rb-reset-tshirt">↺ RESET</button>
+              <button class="resize-action-btn danger" id="rb-del-tshirt">✕ REMOVE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-name-block">
+        <span class="config-label">MODEL NO.</span>
+        <h2 class="product-name">NT-01 CHASSIS</h2>
+      </div>
+    </div>
+    <div class="config-panel">
+      <div class="config-section">
+        <label class="config-label">SELECT DIMENSIONS</label>
+        <div class="size-selector">
+          <button class="size-btn">S</button>
+          <button class="size-btn selected">M</button>
+          <button class="size-btn">L</button>
+          <button class="size-btn">XL</button>
+        </div>
+      </div>
+      <div class="config-section">
+        <label class="config-label">COLOR SPECTRUM</label>
+        <div class="color-selector">
+          <button class="color-swatch swatch-white selected"></button>
+          <button class="color-swatch swatch-slate"></button>
+          <button class="color-swatch swatch-charcoal"></button>
+          <button class="color-swatch swatch-green"></button>
+          <button class="color-swatch swatch-red"></button>
+        </div>
+      </div>
+      <div class="config-section">
+        <label class="config-label">DIGITAL EMBOSSING</label>
+        <p class="config-sub-label">INPUT TEXT</p>
+        <div class="input-wrap">
+          <input type="text" class="config-input config-input-dark" placeholder="TYPE_HERE" maxlength="12">
+        </div>
+        <p class="config-hint"><span class="hint-icon">ℹ</span> Max 12 characters. Applied via high-density kinetic ink.</p>
+      </div>
+      <div class="config-footer">
+        <div class="config-price-block-row">
+          <div>
+            <span class="config-price-label">MODEL NO.</span>
+            <div class="config-model">NT-01 CHASSIS</div>
+          </div>
+          <div class="text-right">
+            <span class="config-price-label">MSRP</span>
+            <div class="config-price" id="ts-price">$14.00</div>
+          </div>
+        </div>
+        <button class="btn-primary btn-full" id="ts-add">ADD TO TSHIRT</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE: HOODIES ===== -->
+<div class="page" id="page-hoodies">
+  <div class="config-layout">
+    <div class="config-preview">
+      <div class="product-img-wrap">
+        <div class="product-img product-img-hoodie" id="upload-area-hoodie">
+          <img class="product-base-img"
+            src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcR89RYBo6mRR-xuGwi7t2QLh1dTzeAc8WXY2Mu02jYS3Gqo-DmrZbaE4FN-FUpnezDns8_Laf8X9iC7e690bCpDY7jWqOw7Z56OO__0RuOhyBrSFB8XfFQIw9xkJuArHJhqjw&usqp=CAc" alt="Hoodie"
+            onerror="this.style.display='none'">
+          <input type="file" accept="image/*" class="upload-file-input" id="file-hoodie">
+          <div class="upload-zone upload-zone-rect" id="upload-zone-hoodie">
+            <div class="upload-icon">📷<span>+</span></div>
+            <p>UPLOAD LOGO / PHOTO</p>
+            <p class="upload-hint">Click or drag &amp; drop</p>
+          </div>
+          <img class="upload-preview" id="preview-hoodie" src="" alt="Logo">
+          <button class="upload-remove" id="remove-hoodie" title="Remove">✕</button>
+          <div class="hoodie-dot hoodie-dot-left"></div>
+          <div class="hoodie-dot hoodie-dot-right"></div>
+          <div class="img-resize-panel" id="resize-hoodie">
+            <div class="resize-row">
+              <span class="resize-label">SIZE</span>
+              <input type="range" class="resize-slider" id="rs-size-hoodie" min="10" max="100" value="55">
+              <span class="resize-val" id="rv-size-hoodie">55%</span>
+            </div>
+            <div class="resize-row">
+              <span class="resize-label">← →</span>
+              <input type="range" class="resize-slider" id="rs-x-hoodie" min="-40" max="40" value="0">
+              <span class="resize-val" id="rv-x-hoodie">0</span>
+            </div>
+            <div class="resize-row">
+              <span class="resize-label">↑ ↓</span>
+              <input type="range" class="resize-slider" id="rs-y-hoodie" min="-40" max="40" value="0">
+              <span class="resize-val" id="rv-y-hoodie">0</span>
+            </div>
+            <div class="resize-btns">
+              <button class="resize-action-btn" id="rb-change-hoodie">📁 CHANGE</button>
+              <button class="resize-action-btn" id="rb-reset-hoodie">↺ RESET</button>
+              <button class="resize-action-btn danger" id="rb-del-hoodie">✕ REMOVE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-name-block">
+        <h2 class="product-name hoodie-name">NOCTURNE_H1</h2>
+        <p class="product-series">TECHNICAL APPAREL // CORE SERIES</p>
+      </div>
+    </div>
+    <div class="config-panel">
+      <div class="config-price-top">
+        <div>
+          <span class="config-price-label">MSRP</span>
+          <div class="config-price" id="hd-price">$24.00</div>
+        </div>
+        <div class="text-right">
+          <span class="config-price-label">EST. SHIP</span>
+          <div class="ship-time">48 HOURS</div>
+        </div>
+      </div>
+      <div class="config-section">
+        <label class="config-label">FABRIC TECHNOLOGY</label>
+        <div class="option-cards">
+          <div class="option-card selected"><strong>Premium Fleece</strong><span>450GSM Ultra-Soft Interior</span></div>
+          <div class="option-card"><strong>Organic Cotton</strong><span>Breathable Sustainable Weave</span></div>
+        </div>
+      </div>
+      <div class="config-section">
+        <label class="config-label">COLOR PROFILE</label>
+        <div class="color-selector">
+          <button class="color-swatch swatch-black selected"></button>
+          <button class="color-swatch swatch-charcoal"></button>
+          <button class="color-swatch swatch-slate"></button>
+          <button class="color-swatch swatch-green"></button>
+        </div>
+      </div>
+      <div class="config-section">
+        <label class="config-label">PERSONALIZATION</label>
+        <div class="input-wrap">
+          <input type="text" class="config-input" placeholder="ENTER IDENTIFIER..." maxlength="8">
+          <span class="input-icon">✎</span>
+        </div>
+        <p class="config-hint">Maximum 8 characters. Technical laser engraving on chest panel.</p>
+      </div>
+      <div class="config-section">
+        <label class="config-label">SIZE GUIDE</label>
+        <div class="size-selector">
+          <button class="size-btn">S</button>
+          <button class="size-btn selected">M</button>
+          <button class="size-btn">L</button>
+          <button class="size-btn">XL</button>
+        </div>
+      </div>
+      <div class="config-footer">
+        <div class="config-price-block-row">
+          <button class="btn-reset">RESET DESIGN</button>
+          <div class="text-right">
+            <span class="config-price-label">SUBTOTAL</span>
+            <div class="config-price" id="hd-sub">$24.00</div>
+          </div>
+        </div>
+        <button class="btn-primary btn-full" id="hd-add">ADD TO HOODIE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE: CHECKOUT ===== -->
+<div class="page" id="page-checkout">
+  <div class="checkout-layout">
+    <div class="checkout-summary">
+      <h3 class="checkout-section-title">ORDER SUMMARY</h3>
+      <div class="checkout-items" id="checkout-items"></div>
+      <div class="checkout-subtotals">
+        <div class="subtotal-row"><span>Subtotal</span><span id="co-subtotal">$0.00</span></div>
+        <div class="subtotal-row"><span>Shipping</span><span class="accent">FREE</span></div>
+        <div class="subtotal-row"><span>Tax</span><span id="co-tax">$0.00</span></div>
+      </div>
+      <div class="checkout-total">
+        <span>TOTAL</span>
+        <span class="total-num accent" id="co-total">$0.00</span>
+      </div>
+      <div class="secure-badge">
+        <span>🛡</span>
+        <span>SECURE ENCRYPTED TERMINAL PROTOCOL ACTIVE</span>
+      </div>
+    </div>
+
+    <div class="checkout-visual">
+      <div class="checkout-product-visual">
+        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&q=80" class="co-img co-img-1" alt="">
+        <img src="https://images.unsplash.com/photo-1624913503273-5f9c4e980dba?w=300&q=80" class="co-img co-img-2" alt="">
+      </div>
+      <h2 class="checkout-brand">PACKCRAFT</h2>
+      <p class="checkout-brand-sub">PRECISION CARRY &amp; APPAREL SYSTEMS</p>
+    </div>
+
+    <div class="checkout-form">
+      <h3 class="checkout-section-title">DELIVERY INFORMATION</h3>
+      <div class="form-group">
+        <label class="form-label">FULL NAME</label>
+        <input class="form-input" type="text" placeholder="ALEX NEON" id="co-name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">PHONE NUMBER</label>
+        <input class="form-input" type="tel" placeholder="+1 (55) 000-0000" id="co-phone">
+      </div>
+      <div class="form-group">
+        <label class="form-label">DELIVERY LOCATION</label>
+        <p class="form-hint">Click on the map to select your delivery location</p>
+        <div id="map-container" class="map-container"></div>
+        <p class="location-display" id="location-display">📍 Location: Not selected</p>
+        <input type="hidden" id="co-latitude" value="">
+        <input type="hidden" id="co-longitude" value="">
+        <input type="hidden" id="co-location-text" value="">
+      </div>
+      <button class="btn-primary btn-full" id="pay-btn">SEND ORDER</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE: ORDER SUCCESS ===== -->
+<div class="page" id="page-success">
+  <div class="success-layout">
+    <div class="success-left">
+      <div class="success-check">✓</div>
+      <h1 class="success-title">Order Successful!</h1>
+      <p class="success-order accent">ORDER #CYO-123456</p>
+      <p class="success-msg">Your neural network has processed the transaction. A confirmation email has been dispatched to your encrypted inbox.</p>
+      <div class="success-support">
+        <span class="support-icon">🤖</span>
+        <div>
+          <strong>Need Assistance?</strong>
+          <p>Our technicians are available 24/7 for order support or adjustments.</p>
+        </div>
+      </div>
+      <button class="btn-ghost-lg" data-page="home">Back to Home →</button>
+    </div>
+    <div class="success-right">
+      <h3 class="checkout-section-title">ORDER SUMMARY</h3>
+      <div class="success-items" id="success-items"></div>
+      <div class="success-totals">
+        <div class="subtotal-row"><span>Subtotal</span><span id="su-subtotal">$165.00</span></div>
+        <div class="subtotal-row"><span>Processing</span><span class="accent">FREE</span></div>
+      </div>
+      <div class="success-total-row">
+        <div>
+          <div class="config-price-label">TOTAL PAID</div>
+          <div class="success-total-price" id="su-total">$165.00</div>
+        </div>
+        <span class="secured-badge">● SECURED</span>
+      </div>
+      <div class="delivery-card">
+        <div class="delivery-left">
+          <span class="delivery-icon">🚚</span>
+          <div>
+            <div class="config-price-label">ESTIMATED DELIVERY</div>
+            <div class="accent">Dec 24 - Dec 26</div>
+          </div>
+        </div>
+        <span class="delivery-arrow">›</span>
+      </div>
+    </div>
+  </div>
+  <footer class="success-footer">
+    <div class="accent" style="font-weight:700;font-size:.75rem;letter-spacing:.1em">NEURAL FOREST</div>
+    <div class="footer-legal-links">
+      <a href="#">PRIVACY POLICY</a>
+      <a href="#">TERMS OF SERVICE</a>
+      <a href="#">SUPPORT</a>
+    </div>
+    <div style="color:var(--muted);font-size:.7rem">© 2024 NEURAL FOREST. ALL RIGHTS RESERVED.</div>
+  </footer>
+</div>
+
+<!-- ===== PAGE: BONUS ===== -->
+<div class="page" id="page-bonus">
+  <section class="bonus-page">
+    <div class="bonus-header">
+      <div class="bonus-header-left">
+        <p class="bonus-eyebrow">NEURAL LOYALTY PROGRAM</p>
+        <h1 class="bonus-title">Your Synthetic<br>Growth Core.</h1>
+        <p class="bonus-desc">Level up your gear acquisition through neural engagement. Every order bridges the gap between hardware and potential.</p>
+      </div>
+      <div class="bonus-balance-card">
+        <p class="config-price-label">CURRENT BALANCE</p>
+        <div class="balance-num">12,450 <span class="balance-unit">NP</span></div>
+        <div class="balance-icon">⬡</div>
+        <div class="balance-bar-wrap">
+          <div class="balance-bar"><div class="balance-fill" style="width:82%"></div></div>
+        </div>
+        <div class="balance-bar-labels">
+          <span></span>
+          <span class="config-price-label">LVL 4: ELITE</span>
+        </div>
+        <p class="config-hint">2,550 NP TO REACH COMMANDER RANK</p>
+      </div>
+    </div>
+    <h2 class="bonus-section-title">Active Benefits &amp; Exchange</h2>
+    <div class="bonus-grid">
+      <div class="bonus-exchange-col">
+        <div class="exchange-card">
+          <div>
+            <p class="config-price-label">POINT EXCHANGE</p>
+            <p class="exchange-val">100 NP = <span class="accent">$5 off</span></p>
+          </div>
+          <button class="exchange-btn">⇄</button>
+        </div>
+        <div class="exchange-card">
+          <div>
+            <p class="config-price-label">POINT EXCHANGE</p>
+            <p class="exchange-val">200 NP = <span class="accent">$12 off</span></p>
+          </div>
+          <button class="exchange-btn">⇄</button>
+        </div>
+      </div>
+      <div class="tactical-card">
+        <div class="tactical-badge">TACTICAL CYCLE</div>
+        <p class="tactical-sub">Earn every 5 acquisitions</p>
+        <h3 class="tactical-title">5 orders = <span class="accent">$5 discount</span> on next order</h3>
+        <p class="tactical-desc">Complete your tactical cycle. Every 5th acquisition unlocks a credit injection for your next gear piece.</p>
+        <div class="tactical-dots">
+          <span class="tdot tdot-filled"></span>
+          <span class="tdot tdot-filled"></span>
+          <span class="tdot tdot-filled"></span>
+          <span class="tdot"></span>
+        </div>
+        <button class="btn-primary">Sync Progress →</button>
+      </div>
+    </div>
+    <div class="extended-card">
+      <div class="extended-icon">✦</div>
+      <div class="extended-info">
+        <h3>Extended Ops: 10 orders = $24 bonus</h3>
+        <p>Double your cycle for a premium neural credit injection. Reward automatically applies to your balance.</p>
+      </div>
+      <div class="extended-progress">
+        <div class="config-price-label">PROGRESS: 6 / 10 ORDERS</div>
+        <div class="balance-bar"><div class="balance-fill" style="width:60%"></div></div>
+        <div class="text-right">60%</div>
+      </div>
+    </div>
+    <h2 class="bonus-section-title">Neural Activity Logs</h2>
+    <div class="activity-table">
+      <div class="table-header">
+        <span>DATE</span><span>ACTIVITY</span><span>TYPE</span><span class="text-right">POINTS</span>
+      </div>
+      <div class="table-row">
+        <span>Oct 24, 2024</span>
+        <div><div>Neural Core - Carbon Edition</div><div class="config-price-label">Order #NG-9921</div></div>
+        <span class="table-badge">PURCHASE</span>
+        <span class="text-right accent">+ 1,250</span>
+      </div>
+      <div class="table-row">
+        <span>Sep 28, 2024</span>
+        <div><div>Cycle Completion Bonus</div><div class="config-price-label">5th Order Milestone</div></div>
+        <span class="table-badge">MISSION</span>
+        <span class="text-right accent">+ 250</span>
+      </div>
+      <div class="table-row">
+        <span>Sep 15, 2024</span>
+        <div><div>Tactical Sling Bag</div><div class="config-price-label">Order #NG-8843</div></div>
+        <span class="table-badge">PURCHASE</span>
+        <span class="text-right accent">+ 850</span>
+      </div>
+    </div>
+    <footer class="bonus-footer">
+      <span class="accent" style="font-weight:700;font-size:.8rem;letter-spacing:.1em">NEURAL FOREST GEAR</span>
+      <div class="footer-legal-links">
+        <a href="#">PRIVACY POLICY</a>
+        <a href="#">TERMS OF SERVICE</a>
+        <a href="#">SUSTAINABILITY</a>
+        <a href="#">SUPPORT</a>
+      </div>
+      <span style="color:var(--muted);font-size:.7rem">© 2024 NEURAL FOREST GEAR. ALL RIGHTS RESERVED.</span>
+    </footer>
+  </section>
+</div>
+
+<!-- CART TOAST -->
+<div class="cart-toast" id="cart-toast">
+  <span class="toast-icon">✓</span>
+  <span id="toast-msg">Item added to cart!</span>
+  <button class="btn-primary toast-checkout" id="toast-checkout">CHECKOUT</button>
+</div>
+
+<!-- CART BADGE -->
+<div class="cart-badge" id="cart-badge" style="display:none" data-page="checkout">
+  🛒 <span id="cart-count">0</span>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
