@@ -653,6 +653,147 @@ document.getElementById('biz-submit-btn')?.addEventListener('click', e => {
 });
 
 // ─────────────────────────────────────────────
+// NAV LABEL EDITING  (double-click to rename)
+// ─────────────────────────────────────────────
+document.querySelectorAll('.nav-label').forEach(label => {
+  // Add hint tooltip
+  const hint = document.createElement('span');
+  hint.className = 'nav-label-hint';
+  hint.textContent = 'Double-click to rename';
+  label.parentElement.style.position = 'relative';
+  label.parentElement.appendChild(hint);
+
+  label.addEventListener('dblclick', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    label.contentEditable = 'true';
+    label.focus();
+    // Select all text
+    const range = document.createRange();
+    range.selectNodeContents(label);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  });
+
+  label.addEventListener('blur', () => {
+    label.contentEditable = 'false';
+    if (!label.textContent.trim()) label.textContent = 'UNTITLED';
+    label.textContent = label.textContent.trim().toUpperCase();
+  });
+
+  label.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); label.blur(); }
+    if (e.key === 'Escape') { e.preventDefault(); label.contentEditable = 'false'; }
+    // Stop navigation keys from bubbling
+    e.stopPropagation();
+  });
+
+  // Prevent click navigation while editing
+  label.addEventListener('click', e => {
+    if (label.contentEditable === 'true') e.stopPropagation();
+  });
+});
+
+// ─────────────────────────────────────────────
+// TEXT ON PRODUCT OVERLAY SYSTEM
+// ─────────────────────────────────────────────
+const textState = {
+  backpack: { text:'', font:"'Barlow Condensed', sans-serif", size:28, color:'#2dff6e', bold:false, italic:false, upper:false, pos:'center' },
+  wallet:   { text:'', font:"'Barlow Condensed', sans-serif", size:22, color:'#2dff6e', bold:false, italic:false, upper:false, pos:'center' },
+  tshirt:   { text:'', font:"'Barlow Condensed', sans-serif", size:32, color:'#2dff6e', bold:false, italic:false, upper:false, pos:'center' },
+  hoodie:   { text:'', font:"'Barlow Condensed', sans-serif", size:28, color:'#2dff6e', bold:false, italic:false, upper:false, pos:'center' },
+};
+
+function applyTextOverlay(product) {
+  const st      = textState[product];
+  const overlay = document.getElementById(`text-overlay-${product}`);
+  const render  = document.getElementById(`text-render-${product}`);
+  if (!overlay || !render) return;
+
+  const displayText = st.upper ? st.text.toUpperCase() : st.text;
+  render.textContent = displayText;
+
+  // Position class
+  overlay.className = `product-text-overlay pos-${st.pos}`;
+
+  // Styles
+  render.style.fontFamily   = st.font;
+  render.style.fontSize     = `${st.size}px`;
+  render.style.color        = st.color;
+  render.style.fontWeight   = st.bold ? '800' : '600';
+  render.style.fontStyle    = st.italic ? 'italic' : 'normal';
+  render.style.display      = displayText ? 'block' : 'none';
+}
+
+['backpack','wallet','tshirt','hoodie'].forEach(product => {
+  // Live text input
+  const input = document.getElementById(`text-input-${product}`);
+  if (input) {
+    input.addEventListener('input', () => {
+      textState[product].text = input.value;
+      applyTextOverlay(product);
+    });
+  }
+
+  // Font select
+  const fontSel = document.getElementById(`text-font-${product}`);
+  if (fontSel) {
+    fontSel.addEventListener('change', () => {
+      textState[product].font = fontSel.value;
+      applyTextOverlay(product);
+    });
+  }
+
+  // Size slider
+  const sizeSlider = document.getElementById(`text-size-${product}`);
+  const sizeVal    = document.getElementById(`text-size-val-${product}`);
+  if (sizeSlider) {
+    sizeSlider.addEventListener('input', () => {
+      textState[product].size = parseInt(sizeSlider.value);
+      if (sizeVal) sizeVal.textContent = `${sizeSlider.value}px`;
+      applyTextOverlay(product);
+    });
+  }
+
+  // Color buttons
+  document.querySelectorAll(`.text-tool-wrap[data-target="${product}"] .text-color-btn`).forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      document.querySelectorAll(`.text-tool-wrap[data-target="${product}"] .text-color-btn`)
+        .forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      textState[product].color = btn.dataset.color;
+      applyTextOverlay(product);
+    });
+  });
+
+  // Style buttons (Bold / Italic / Uppercase)
+  ['bold','italic','upper'].forEach(style => {
+    const btn = document.getElementById(`text-${style}-${product}`);
+    if (!btn) return;
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      textState[product][style] = !textState[product][style];
+      btn.classList.toggle('active', textState[product][style]);
+      applyTextOverlay(product);
+    });
+  });
+
+  // Position buttons
+  document.querySelectorAll(`.text-pos-btn[data-product="${product}"]`).forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      document.querySelectorAll(`.text-pos-btn[data-product="${product}"]`)
+        .forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      textState[product].pos = btn.dataset.pos;
+      applyTextOverlay(product);
+    });
+  });
+});
+
+// ─────────────────────────────────────────────
 // BULK ORDER CONFIGURATOR (Business tab only)
 // ─────────────────────────────────────────────
 

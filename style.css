@@ -2621,7 +2621,247 @@ body {
 #biz-order-size .tag { font-size: .65rem; padding: .4rem .85rem; }
 
 /* ============================================
-   BULK ORDER CONFIGURATOR (Business tab only)
+   NAV TAB EDITABLE LABELS
+   ============================================ */
+.nav-label {
+  outline: none;
+  border-radius: 3px;
+  transition: background .15s;
+  display: inline-block;
+  min-width: 4px;
+}
+
+.nav-label[contenteditable="true"] {
+  background: rgba(45,255,110,.12);
+  padding: 0 4px;
+  cursor: text;
+  border-bottom: 1px dashed var(--green);
+}
+
+.nav-label-hint {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: .52rem;
+  color: var(--green);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: .2rem .5rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .2s;
+  z-index: 200;
+}
+
+.nav-link:hover .nav-label-hint { opacity: 1; }
+
+/* ============================================
+   PRODUCT TEXT OVERLAY
+   ============================================ */
+.product-text-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-text-overlay.pos-top-left     { align-items: flex-start; justify-content: flex-start; padding: 12% 10%; }
+.product-text-overlay.pos-top-center   { align-items: flex-start; justify-content: center;     padding-top: 10%; }
+.product-text-overlay.pos-top-right    { align-items: flex-start; justify-content: flex-end;   padding: 12% 10%; }
+.product-text-overlay.pos-center       { align-items: center;     justify-content: center; }
+.product-text-overlay.pos-bottom-left  { align-items: flex-end;   justify-content: flex-start; padding: 12% 10%; }
+.product-text-overlay.pos-bottom-center{ align-items: flex-end;   justify-content: center;     padding-bottom: 10%; }
+.product-text-overlay.pos-bottom-right { align-items: flex-end;   justify-content: flex-end;   padding: 12% 10%; }
+
+.product-text-rendered {
+  display: block;
+  font-weight: 700;
+  letter-spacing: .05em;
+  line-height: 1.2;
+  text-align: center;
+  text-shadow: 0 1px 6px rgba(0,0,0,.6);
+  word-break: break-word;
+  max-width: 85%;
+  transition: all .15s;
+  white-space: pre-wrap;
+}
+
+/* ============================================
+   TEXT TOOL PANEL
+   ============================================ */
+.text-tool-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: .85rem;
+}
+
+.text-tool-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.text-tool-row .input-icon {
+  position: absolute;
+  right: .75rem;
+}
+
+.text-live-input {
+  width: 100%;
+  padding-right: 2rem !important;
+  font-size: .85rem !important;
+  letter-spacing: .04em;
+}
+
+.text-tool-options {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: .5rem .75rem;
+}
+
+.text-tool-group {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+.text-tool-label {
+  font-family: var(--font-mono);
+  font-size: .52rem;
+  letter-spacing: .12em;
+  color: var(--muted);
+}
+
+.text-tool-select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: .35rem .5rem;
+  font-family: var(--font-mono);
+  font-size: .65rem;
+  color: var(--white);
+  outline: none;
+  cursor: pointer;
+}
+
+.text-tool-select:focus { border-color: var(--green); }
+
+/* Size slider row */
+.text-tool-group:has(.text-size-slider) {
+  flex-direction: row;
+  align-items: center;
+  gap: .4rem;
+  flex-wrap: wrap;
+}
+
+.text-tool-group:has(.text-size-slider) .text-tool-label {
+  width: 100%;
+}
+
+.text-size-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 3px;
+  background: var(--bg-4);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.text-size-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: var(--green);
+  cursor: pointer;
+}
+
+.text-size-val {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  color: var(--green);
+  min-width: 28px;
+  text-align: right;
+}
+
+/* Color swatches */
+.text-color-swatches { display: flex; gap: .35rem; flex-wrap: wrap; }
+
+.text-color-btn {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform .15s, border-color .15s;
+}
+
+.text-color-btn:hover { transform: scale(1.15); }
+.text-color-btn.selected { border-color: var(--white); box-shadow: 0 0 0 1px var(--green); }
+
+/* Style buttons */
+.text-style-btns { display: flex; gap: .35rem; }
+
+.text-style-btn {
+  width: 30px; height: 26px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--muted);
+  font-size: .78rem;
+  cursor: pointer;
+  transition: all .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-style-btn.active {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(45,255,110,.08);
+}
+
+/* Position buttons */
+.text-position-row {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding-top: .25rem;
+  border-top: 1px solid var(--border-2);
+}
+
+.text-pos-btns { display: flex; gap: .3rem; }
+
+.text-pos-btn {
+  width: 26px; height: 26px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--muted);
+  font-size: .75rem;
+  cursor: pointer;
+  transition: all .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-pos-btn:hover { border-color: var(--green); color: var(--green); }
+.text-pos-btn.selected { border-color: var(--green); background: rgba(45,255,110,.1); color: var(--green); }
+
+/* ============================================
+   BULK ORDER CONFIGURATOR
    ============================================ */
 .biz-catalog-card {
   display: flex;
